@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <title>SD-WAN|SD-Branch|SASE|云网融合|企业组网|网络专线-光联世纪</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+    <meta name="keywords" content="企业组网,SD-WAN,SD-Branch,sase,mpls,ipsec,ssl,mstp" />
+    <meta name="description" content="光联世纪 - 企业智能网络服务提供商" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+        }
+
+        /* 头部导航 */
+        header {
+            background: linear-gradient(135deg, #003366 0%, #004d80 100%);
+            color: white;
+            padding: 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-info span {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .login-btn, .logout-btn {
+            background-color: #ff6b35;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        .login-btn:hover, .logout-btn:hover {
+            background-color: #ff5722;
+        }
+
+        /* 主容器 */
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 30px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #003366 0%, #0052a3 50%, #004d80 100%);
+            color: white;
+            padding: 80px 60px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 60px;
+            box-shadow: 0 10px 30px rgba(0, 51, 102, 0.15);
+        }
+
+        .hero h2 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background-color: #ff6b35;
+            color: white;
+            padding: 14px 40px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #ff5722;
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: #003366;
+            padding: 14px 40px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 2px solid white;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* 服务卡片 */
+        .services {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #003366;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #003366;
+            font-weight: 600;
+        }
+
+        .service-card p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        /* 页脚 */
+        footer {
+            background-color: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 40px 30px;
+            margin-top: 60px;
+            border-top: 1px solid #333;
+        }
+
+        /* 认证系统 */
+        .auth-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s;
+        }
+
+        .auth-modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .auth-content {
+            background: white;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .auth-header {
+            background: linear-gradient(135deg, #003366 0%, #0052a3 100%);
+            color: white;
+            padding: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .auth-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s;
+        }
+
+        .close-btn:hover {
+            opacity: 0.8;
+        }
+
+        .auth-body {
+            padding: 40px;
+        }
+
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .progress-steps::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #ddd;
+            z-index: 0;
+        }
+
+        .step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-circle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #f0f0f0;
+            color: #999;
+            font-weight: 600;
+            margin-bottom: 8px;
+            transition: all 0.3s;
+        }
+
+        .step.active .step-circle {
+            background: #003366;
+            color: white;
+            box-shadow: 0 0 0 4px rgba(0, 51, 102, 0.1);
+        }
+
+        .step.completed .step-circle {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .step-label {
+            display: block;
+            font-size: 12px;
+            color: #999;
+            font-weight: 500;
+        }
+
+        .step.active .step-label {
+            color: #003366;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #003366;
+            box-shadow: 0 0 0 2px rgba(0, 51, 102, 0.1);
+        }
+
+        .verification-info {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .timer-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #ddd;
+        }
+
+        .qrcode-container {
+            text-align: center;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        .qrcode-container img {
+            width: 200px;
+            height: 200px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .backup-codes {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border-left: 3px solid #ffc107;
+        }
+
+        .backup-codes h4 {
+            margin-bottom: 10px;
+            color: #333;
+            font-size: 13px;
+        }
+
+        .backup-codes code {
+            display: inline-block;
+            background: white;
+            padding: 4px 8px;
+            border-radius: 3px;
+            margin: 3px;
+            font-size: 12px;
+            font-family: monospace;
+        }
+
+        .form-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .form-buttons button {
+            flex: 1;
+            padding: 12px;
+            border-radius: 4px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .success-message {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .success-icon {
+            font-size: 48px;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        .success-message h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .success-message p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .alert {
+            padding: 12px 15px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-size: 13px;
+        }
+
+        .alert-error {
+            background: #fee;
+            color: #c33;
+            border: 1px solid #fcc;
+        }
+
+        .alert-success {
+            background: #efe;
+            color: #3c3;
+            border: 1px solid #cfc;
+        }
+
+        .alert-info {
+            background: #eef;
+            color: #33c;
+            border: 1px solid #ccf;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero {
+                padding: 40px 20px;
+            }
+
+            .hero h2 {
+                font-size: 28px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .auth-content {
+                max-width: 95%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 导航头 -->
+    <header>
+        <div class="header-content">
+            <h1>光联世纪</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">首页</a></li>
+                    <li><a href="#services">服务</a></li>
+                    <li><a href="#about">关于</a></li>
+                    <li class="user-info" id="userInfo" style="display: none;">
+                        <span id="username"></span>
+                        <button class="logout-btn" onclick="logout()">退出</button>
+                    </li>
+                    <li id="authButton">
+                        <button class="login-btn" onclick="openLoginModal()">登录</button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 主内容 -->
+    <main>
+        <section class="hero" id="home">
+            <h2>让智能网络服务为客户创造价值</h2>
+            <p>专注于企业智能网络服务领域，提供定制化解决方案</p>
+            <div class="hero-buttons">
+                <button class="btn-primary" onclick="openLoginModal()">立即登录</button>
+                <button class="btn-secondary" onclick="openRegisterModal()">注册账户</button>
+            </div>
+        </section>
+
+        <section class="services" id="services">
+            <h2 class="section-title">核心服务</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🌐</div>
+                    <h3>SD-WAN</h3>
+                    <p>软件定义广域网，提供灵活、高效的企业网络连接</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔒</div>
+                    <h3>SASE</h3>
+                    <p>安全访问服务边缘，整合网络和安全功能</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">☁️</div>
+                    <h3>云网融合</h3>
+                    <p>云计算与网络深度融合，提供高效的网络体验</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Copyright © 2005-2026 Fnetlink.com All Rights Reserved.</p>
+        <p>光联世纪 | 企业智能网络服务提供商</p>
+    </footer>
+
+    <!-- 登录模态窗口 -->
+    <div id="loginModal" class="auth-modal">
+        <div class="auth-content">
+            <div class="auth-header">
+                <h2 id="authTitle">用户登录</h2>
+                <button class="close-btn" onclick="closeAuthModal()">&times;</button>
+            </div>
+            <div class="auth-body">
+                <!-- 进度指示器 -->
+                <div class="progress-steps" id="progressSteps">
+                    <div class="step active" id="step1-indicator">
+                        <span class="step-circle">1</span>
+                        <span class="step-label">密码</span>
+                    </div>
+                    <div class="step" id="step2-indicator">
+                        <span class="step-circle">2</span>
+                        <span class="step-label">邮件验证</span>
+                    </div>
+                    <div class="step" id="step3-indicator">
+                        <span class="step-circle">3</span>
+                        <span class="step-label">2FA验证</span>
+                    </div>
+                </div>
+
+                <!-- 错误/提示信息 -->
+                <div id="alertContainer"></div>
+
+                <!-- 第一步：用户名和密码 -->
+                <div id="step1" class="auth-step">
+                    <div class="form-group">
+                        <label for="username">用户名或邮箱</label>
+                        <input type="text" id="username" placeholder="请输入用户名或邮箱">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">密码</label>
+                        <input type="password" id="password" placeholder="请输入密码">
+                    </div>
+                    <button class="btn-primary" style="width: 100%;" onclick="step1Verify()">下一步</button>
+                </div>
+
+                <!-- 第二步：邮件验证 -->
+                <div id="step2" class="auth-step hidden">
+                    <div class="verification-info">
+                        验证码已发送至您的邮箱<br>
+                        <strong id="emailDisplay"></strong>
+                    </div>
+                    <div class="form-group">
+                        <label for="emailCode">请输入6位验证码</label>
+                        <input type="text" id="emailCode" placeholder="000000" maxlength="6" pattern="[0-9]{6}">
+                    </div>
+                    <div class="timer-info">
+                        <span id="resendTimer">60秒后可重新发送</span>
+                        <button class="btn-secondary" id="resendBtn" disabled style="border: none; background: none; padding: 0; color: #ccc; cursor: not-allowed;" onclick="resendCode()">重新发送</button>
+                    </div>
+                    <div class="form-buttons">
+                        <button class="btn-secondary" onclick="goBackStep(1)">返回</button>
+                        <button class="btn-primary" onclick="step2Verify()">下一步</button>
+                    </div>
+                </div>
+
+                <!-- 第三步：双因素认证 -->
+                <div id="step3" class="auth-step hidden">
+                    <div class="verification-info">
+                        请输入您的身份验证器中的6位数字
+                    </div>
+                    <div class="form-group">
+                        <label for="totpCode">验证码</label>
+                        <input type="text" id="totpCode" placeholder="000000" maxlength="6" pattern="[0-9]{6}">
+                    </div>
+                    <div class="verification-info">
+                        或输入您的备用码
+                    </div>
+                    <div class="form-group">
+                        <label for="backupCode">备用码</label>
+                        <input type="text" id="backupCode" placeholder="请输入备用码" style="text-transform: uppercase;">
+                    </div>
+                    <div class="form-buttons">
+                        <button class="btn-secondary" onclick="goBackStep(2)">返回</button>
+                        <button class="btn-primary" onclick="step3Verify()">登录</button>
+                    </div>
+                </div>
+
+                <!-- 成功界面 -->
+                <div id="successStep" class="auth-step hidden">
+                    <div class="success-message">
+                        <div class="success-icon">✓</div>
+                        <h3>登录成功</h3>
+                        <p id="successMessage"></p>
+                        <button class="btn-primary" style="width: 100%;" onclick="completeLogin()">进入系统</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:5000/api';
+        let currentStep = 1;
+        let isRegisterMode = false;  // 添加标志变量
+        let authData = {
+            username: '',
+            sessionToken: '',
+            email: ''
+        };
+
+        function showAlert(message, type = 'error') {
+            const alertContainer = document.getElementById('alertContainer');
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type}`;
+            alertDiv.textContent = message;
+            alertContainer.innerHTML = '';
+            alertContainer.appendChild(alertDiv);
+        }
+
+        function clearAlert() {
+            document.getElementById('alertContainer').innerHTML = '';
+        }
+
+        function openLoginModal() {
+            document.getElementById('loginModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+            isRegisterMode = false;
+            
+            // 恢复 step1 为原始登录表单
+            document.getElementById('step1').innerHTML = `
+                    <div class="form-group">
+                        <label for="username">用户名或邮箱</label>
+                        <input type="text" id="username" placeholder="请输入用户名或邮箱">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">密码</label>
+                        <input type="password" id="password" placeholder="请输入密码">
+                    </div>
+                    <button class="btn-primary" style="width: 100%;" onclick="step1Verify()">下一步</button>
+                `;
+            
+            resetAuth();
+        }
+
+        function openRegisterModal() {
+            document.getElementById('loginModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+            isRegisterMode = true;
+            
+            // 显示注册表单
+            document.getElementById('step1').innerHTML = `
+                    <div class="form-group">
+                        <label>用户名</label>
+                        <input type="text" id="regUsername" placeholder="输入用户名">
+                    </div>
+                    <div class="form-group">
+                        <label>邮箱</label>
+                        <input type="email" id="regEmail" placeholder="输入邮箱地址">
+                    </div>
+                    <div class="form-group">
+                        <label>密码</label>
+                        <input type="password" id="regPassword" placeholder="输入密码">
+                    </div>
+                    <div class="form-group">
+                        <label>确认密码</label>
+                        <input type="password" id="regPasswordConfirm" placeholder="再次输入密码">
+                    </div>
+                    <div class="form-buttons">
+                        <button onclick="registerUser()" style="background: #003366; color: white; flex: 1;">注册</button>
+                        <button onclick="closeAuthModal()" style="background: #ccc; flex: 1;">关闭</button>
+                    </div>
+                `;
+            
+            // 隐藏步骤指示器
+            document.querySelectorAll('.step').forEach(s => s.classList.add('hidden'));
+            
+            resetAuth();
+        }
+
+        function closeAuthModal() {
+            document.getElementById('loginModal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        function resetAuth() {
+            currentStep = 1;
+            authData = { username: '', sessionToken: '', email: '' };
+            
+            // 清空登录表单
+            const username = document.getElementById('username');
+            const password = document.getElementById('password');
+            if (username) username.value = '';
+            if (password) password.value = '';
+            
+            // 清空邮件验证表单
+            const emailCode = document.getElementById('emailCode');
+            if (emailCode) emailCode.value = '';
+            
+            // 清空 TOTP 表单
+            const totpCode = document.getElementById('totpCode');
+            const backupCode = document.getElementById('backupCode');
+            if (totpCode) totpCode.value = '';
+            if (backupCode) backupCode.value = '';
+            
+            clearAlert();
+            
+            if (!isRegisterMode) {
+                // 登录模式：显示步骤指示器
+                document.querySelectorAll('.step').forEach(s => s.classList.remove('hidden'));
+                document.getElementById('step2').classList.add('hidden');
+                document.getElementById('step3').classList.add('hidden');
+                document.getElementById('successStep').classList.add('hidden');
+                document.getElementById('step1').classList.remove('hidden');
+                updateStepDisplay();
+            }
+        }
+
+        function updateStepDisplay() {
+            // 隐藏所有步骤
+            document.querySelectorAll('.auth-step').forEach(step => {
+                step.classList.add('hidden');
+            });
+
+            // 更新进度指示器
+            document.querySelectorAll('.step').forEach((step, idx) => {
+                step.classList.remove('active', 'completed');
+                if (idx + 1 === currentStep) {
+                    step.classList.add('active');
+                } else if (idx + 1 < currentStep) {
+                    step.classList.add('completed');
+                }
+            });
+
+            // 显示当前步骤
+            const stepMap = {
+                1: 'step1',
+                2: 'step2',
+                3: 'step3',
+                4: 'successStep'
+            };
+
+            const stepId = stepMap[currentStep];
+            if (stepId) {
+                document.getElementById(stepId).classList.remove('hidden');
+                
+                // 如果是第三步，先调用setupTOTP来获取二维码或直接验证
+                if (currentStep === 3) {
+                    setupTOTP();
+                }
+            }
+
+            const titles = {
+                1: '用户登录 - 第1步',
+                2: '用户登录 - 第2步',
+                3: '用户登录 - 第3步',
+                4: '登录成功'
+            };
+            document.getElementById('authTitle').textContent = titles[currentStep];
+        }
+
+        function goBackStep(step) {
+            currentStep = step;
+            clearAlert();
+            updateStepDisplay();
+        }
+
+        async function step1Verify() {
+            // 从 step1 容器内查找输入框，确保获取的是正确的元素
+            const step1Container = document.getElementById('step1');
+            const inputs = step1Container.querySelectorAll('input');
+            
+            let username = '';
+            let password = '';
+            
+            // 查找 username 和 password 输入框
+            inputs.forEach(input => {
+                if (input.placeholder && input.placeholder.includes('用户名')) {
+                    username = input.value;
+                } else if (input.type === 'password') {
+                    password = input.value;
+                }
+            });
+
+            if (!username || !password) {
+                showAlert('请输入用户名和密码');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/auth/step1`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    showAlert(data.error || '验证失败');
+                    return;
+                }
+
+                authData.username = username;
+                authData.sessionToken = data.sessionToken;
+                authData.email = data.email;
+
+                // 发送验证码
+                sendEmailCode();
+            } catch (error) {
+                showAlert('网络错误：' + error.message);
+            }
+        }
+
+        async function sendEmailCode() {
+            try {
+                const response = await fetch(`${API_BASE}/auth/step2/send-code`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ sessionToken: authData.sessionToken })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    showAlert(data.error || '发送验证码失败');
+                    return;
+                }
+
+                document.getElementById('emailDisplay').textContent = data.emailTip;
+                currentStep = 2;
+                clearAlert();
+                showAlert('验证码已发送，请查收邮件', 'success');
+                updateStepDisplay();
+                startResendTimer();
+            } catch (error) {
+                showAlert('网络错误：' + error.message);
+            }
+        }
+
+        function startResendTimer() {
+            let countdown = 60;
+            const timerEl = document.getElementById('resendTimer');
+            const resendBtn = document.getElementById('resendBtn');
+
+            resendBtn.disabled = true;
+
+            const interval = setInterval(() => {
+                countdown--;
+                timerEl.textContent = countdown + '秒后可重新发送';
+
+                if (countdown === 0) {
+                    clearInterval(interval);
+                    resendBtn.disabled = false;
+                    resendBtn.style.color = '#003366';
+                    resendBtn.style.cursor = 'pointer';
+                }
+            }, 1000);
+        }
+
+        function resendCode() {
+            sendEmailCode();
+        }
+
+        async function step2Verify() {
+            const code = document.getElementById('emailCode').value;
+
+            if (!code || code.length !== 6) {
+                showAlert('请输入6位验证码');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/auth/step2/verify-code`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        sessionToken: authData.sessionToken,
+                        code: code
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    showAlert(data.error || '验证失败');
+                    return;
+                }
+
+                currentStep = 3;
+                clearAlert();
+                updateStepDisplay();
+            } catch (error) {
+                showAlert('网络错误：' + error.message);
+            }
+        }
+
+        async function step3Verify() {
+            const totpCode = document.getElementById('totpCode').value;
+            const backupCode = document.getElementById('backupCode').value;
+
+            if (!totpCode && !backupCode) {
+                showAlert('请输入验证码或备用码');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/auth/step3/verify-totp`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        sessionToken: authData.sessionToken,
+                        totpCode: totpCode || null,
+                        backupCode: backupCode || null
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    showAlert(data.error || '验证失败');
+                    return;
+                }
+
+                // 保存token
+                localStorage.setItem('authToken', data.token);
+                document.getElementById('successMessage').textContent = `欢迎回来，${data.user.username}`;
+
+                currentStep = 4;
+                clearAlert();
+                updateStepDisplay();
+            } catch (error) {
+                showAlert('网络错误：' + error.message);
+            }
+        }
+
+        // 新增：设置TOTP（第一次使用时）
+        async function setupTOTP() {
+            try {
+                const response = await fetch(`${API_BASE}/auth/step3/setup-totp`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ sessionToken: authData.sessionToken })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    showAlert(data.error || 'TOTP设置失败');
+                    return;
+                }
+
+                // 显示TOTP设置界面
+                if (data.totpEnabled) {
+                    // 用户已启用TOTP，直接显示验证界面
+                    updateStepDisplay();
+                } else {
+                    // 保存 secret 供后续使用
+                    authData.totpSecret = data.secret;
+                    
+                    // 显示二维码设置界面
+                    const step3Container = document.getElementById('step3');
+                    step3Container.innerHTML = `
+                        <div class="verification-info">
+                            请使用身份验证器应用扫描二维码
+                        </div>
+                        <div class="qrcode-container">
+                            <img src="data:image/png;base64,${data.qrCode}" alt="TOTP二维码">
+                        </div>
+                        <div class="backup-codes">
+                            <h4>⚠️ 备用码（请妥善保存）</h4>
+                            <div>
+                                ${data.backupCodes.map(code => `<code>${code}</code>`).join('')}
+                            </div>
+                        </div>
+                        <div class="verification-info">
+                            请在验证器中输入6位验证码以完成设置
+                        </div>
+                        <div class="form-group">
+                            <label for="totpCode">验证码</label>
+                            <input type="text" id="totpCode" placeholder="000000" maxlength="6" pattern="[0-9]{6}">
+                        </div>
+                        <div class="form-buttons">
+                            <button class="btn-secondary" onclick="goBackStep(2)">返回</button>
+                            <button class="btn-primary" onclick="confirmTOTPSetup()">下一步</button>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                showAlert('网络错误：' + error.message);
+            }
+        }
+
+        // 新增：确认TOTP设置
+        async function confirmTOTPSetup() {
+            const totpCode = document.getElementById('totpCode').value;
+
+            if (!totpCode || totpCode.length !== 6) {
+                showAlert('请输入6位验证码');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/auth/step3/verify-totp`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        sessionToken: authData.sessionToken,
+                        totpCode: totpCode,
+                        secret: authData.totpSecret  // 发送 secret 用于首次启用
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    showAlert(data.error || '验证失败');
+                    return;
+                }
+
+                // 保存token
+                localStorage.setItem('authToken', data.token);
+                document.getElementById('successMessage').textContent = `欢迎回来，${data.user.username}`;
+
+                currentStep = 4;
+                clearAlert();
+                updateStepDisplay();
+            } catch (error) {
+                showAlert('网络错误：' + error.message);
+            }
+        }
+
+        function completeLogin() {
+            closeAuthModal();
+            updateUserInfo();
+            location.reload();
+        }
+
+        async function registerUser() {
+            // 从 step1 容器内查找输入框，确保获取的是正确的元素
+            const step1Container = document.getElementById('step1');
+            const inputs = step1Container.querySelectorAll('input');
+            
+            let username = '';
+            let email = '';
+            let password = '';
+            let passwordConfirm = '';
+            
+            // 查找各个输入框
+            inputs.forEach(input => {
+                if (input.placeholder && input.placeholder.includes('用户名')) {
+                    username = input.value;
+                } else if (input.type === 'email') {
+                    email = input.value;
+                } else if (input.placeholder && input.placeholder.includes('再次输入')) {
+                    passwordConfirm = input.value;
+                } else if (input.type === 'password' && !passwordConfirm) {
+                    password = input.value;
+                }
+            });
+
+            if (!username || !email || !password || !passwordConfirm) {
+                showAlert('请填写所有字段');
+                return;
+            }
+
+            if (password !== passwordConfirm) {
+                showAlert('两次输入的密码不一致');
+                return;
+            }
+
+            if (password.length < 6) {
+                showAlert('密码长度至少6位');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/auth/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, email, password })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    showAlert(data.error || '注册失败');
+                    return;
+                }
+
+                showAlert('注册成功！请用新账户登录', 'success');
+                setTimeout(() => {
+                    // 切换到登录模式并重新显示登录表单
+                    isRegisterMode = false;
+                    document.getElementById('step1').innerHTML = `
+                        <div class="form-group">
+                            <label for="username">用户名或邮箱</label>
+                            <input type="text" id="username" placeholder="请输入用户名或邮箱">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">密码</label>
+                            <input type="password" id="password" placeholder="请输入密码">
+                        </div>
+                        <button class="btn-primary" style="width: 100%;" onclick="step1Verify()">下一步</button>
+                    `;
+                    resetAuth();
+                }, 1500);
+            } catch (error) {
+                showAlert('网络错误：' + error.message);
+            }
+        }
+
+        function updateUserInfo() {
+            const token = localStorage.getItem('authToken');
+            if (token) {
+                const decoded = JSON.parse(atob(token.split('.')[1]));
+                document.getElementById('username').textContent = decoded.username;
+                document.getElementById('userInfo').style.display = 'flex';
+                document.getElementById('authButton').style.display = 'none';
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('authToken');
+            document.getElementById('userInfo').style.display = 'none';
+            document.getElementById('authButton').style.display = 'block';
+            location.reload();
+        }
+
+        // 页面加载时检查登录状态
+        window.addEventListener('load', () => {
+            updateUserInfo();
+        });
+
+        // ESC关闭窗口
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeAuthModal();
+        });
+
+        // 点击背景关闭
+        document.getElementById('loginModal').addEventListener('click', (e) => {
+            if (e.target.id === 'loginModal') closeAuthModal();
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,67 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+pip-log.txt
+pip-delete-this-directory.txt
+
+# 虚拟环境
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# 测试
+.coverage
+htmlcov/
+.pytest_cache/
+
+# 环境
+.env.local
+.env.*.local
+
+# Node 版本文件
+node_modules/
+*.js
+!app/
+
+# 日志
+logs/
+*.log
+
+# 临时文件
+tmp/
+temp/
+*.tmp
+
+# 数据库
+*.db.backup

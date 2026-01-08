@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  # 三因素认证系统应用
+  auth-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: auth-system-py
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=development
+      - FLASK_DEBUG=False
+      - PYTHONUNBUFFERED=1
+      - EMAIL_HOST=${EMAIL_HOST:-smtp.qq.com}
+      - EMAIL_PORT=${EMAIL_PORT:-587}
+      - EMAIL_USER=${EMAIL_USER}
+      - EMAIL_PASSWORD=${EMAIL_PASSWORD}
+      - JWT_SECRET=${JWT_SECRET:-your-secret-key}
+      - SECRET_KEY=${SECRET_KEY:-your-secret-key}
+      - APP_NAME=${APP_NAME:-光联世纪}
+    volumes:
+      - ./auth.db:/app/auth.db
+      - ./logs:/app/logs
+    networks:
+      - auth-network
+    depends_on:
+      - mailhog
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # MailHog - 用于测试邮件发送（开发环境）
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: auth-mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    networks:
+      - auth-network
+    restart: unless-stopped
+    environment:
+      MH_STORAGE: memory
+      MH_HOSTNAME: mailhog
+
+networks:
+  auth-network:
+    driver: bridge
+
+volumes:
+  auth-db:
+    driver: local
